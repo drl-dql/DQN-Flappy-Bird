@@ -4,10 +4,10 @@
 
 # MODIFY THESE
 declare training_file="main.py"
-declare walltime="06:00:00"
-declare jobname="cs598-mp4"
-declare netid="zna2"
-declare directory="~/scratch/image-ranking/src/"
+declare walltime="24:00:00"
+declare jobname="drl-dql"
+declare netid="netid"
+declare directory="~/scratch/drl-dql/"
 
 for job in "${directory[@]}"
 do
