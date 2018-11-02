@@ -1,0 +1,12 @@
+#!/bin/bash
+#PBS -l nodes=1:ppn=16:xk
+#PBS -N drl-dql
+#PBS -l walltime=48:00:00
+#PBS -e $PBS_JOBNAME.$PBS_JOBID.err
+#PBS -o $PBS_JOBNAME.$PBS_JOBID.out
+#PBS -M netid@illinois.edu
+cd ~/scratch/drl-dql/
+. /opt/modules/default/init/bash
+module load bwpy/2.0.0-pre2
+module load cudatoolkit
+aprun -n 1 -N 1 python main.py
