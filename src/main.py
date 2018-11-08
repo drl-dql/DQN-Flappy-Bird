@@ -9,6 +9,8 @@ High Level Pipeline.
 
 import argparse
 
+from utils import Params
+
 
 def parse_args():
     """Parse hyper-parameters."""
@@ -35,9 +37,16 @@ def parse_args():
     return args
 
 
+def parse_hparam():
+    """Parse hyper-parameters."""
+    params = Params("experiments/base_model/params.json")
+    return params
+
+
 def main():
     """Main pipeline for Deep Reinforcement Learning with Double Q-learning."""
     args = parse_args()
+    print(args)
     pass
 
 
