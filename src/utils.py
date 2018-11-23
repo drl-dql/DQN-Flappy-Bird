@@ -4,6 +4,9 @@ Deep Reinforcement Learning with Double Q-learning on Atari 2600.
 Helper Functions.
 
 @author: Shubham Bansal,Naman Shukla, Ziyu Zhou, Jianqiu Kong, Zhenye Na
+@references:
+    [1] Hado van Hasselt, Arthur Guez and David Silver.
+        Deep Reinforcement Learning with Double Q-learning. arXiv:1509.06461
 """
 
 import os
@@ -53,12 +56,9 @@ def set_logger(log_path):
     """
     Set the logger to log info in terminal and file `log_path`.
 
-    In general, it is useful to have a logger so that every output to the terminal is saved
-    in a permanent file. Here we save it to `model_dir/train.log`.
-    Example:
-    ```
-    logging.info("Starting training...")
-    ```
+    In general, it is useful to have a logger so that every output to the
+    terminal is saved. In a permanent file. Here we save it to `model_dir/train.log`.
+
     Args:
         log_path: (string) where to log
     """
@@ -95,10 +95,11 @@ def save_checkpoint(state, is_best, checkpoint):
     """
     Save model and training parameters at checkpoint + 'last.pth.tar'.
 
-    If is_best==True, also saves checkpoint + 'best.pth.tar'
+    If is_best == True, also saves checkpoint + 'best.pth.tar'
 
     Args:
-        state: (dict) contains model's state_dict, may contain other keys such as epoch, optimizer state_dict
+        state: (dict) contains model's state_dict, may contain other keys such
+                      as epoch, optimizer state_dict
         is_best: (bool) True if it is the best model seen till now
         checkpoint: (string) folder where parameters are to be saved
     """
@@ -117,7 +118,8 @@ def load_checkpoint(checkpoint, model, optimizer=None):
     """
     Load model parameters (state_dict) from file_path.
 
-    If optimizer is provided, loads state_dict of optimizer assuming it is present in checkpoint.
+    If optimizer is provided, loads state_dict of optimizer assuming it is
+    present in checkpoint.
 
     Args:
         checkpoint: (string) filename which needs to be loaded

@@ -4,11 +4,12 @@ Deep Reinforcement Learning with Double Q-learning on Atari 2600
 High Level Pipeline.
 
 @author: Shubham Bansal,Naman Shukla, Ziyu Zhou, Jianqiu Kong, Zhenye Na
+@references:
+    [1] Hado van Hasselt, Arthur Guez and David Silver.
+        Deep Reinforcement Learning with Double Q-learning. arXiv:1509.06461
 """
 
-
 import argparse
-
 from utils import Params
 
 
@@ -17,15 +18,9 @@ def parse_args():
     parser = argparse.ArgumentParser()
 
     # directory
-    parser.add_argument('--dataroot', type=str, default="../data", help='path to dataset')
-    parser.add_argument('--ckptroot', type=str, default="../model/", help='path to checkpoint')
-
-    # hyperparameters settings
-    parser.add_argument('--lr', type=float, default=0.00025, help='learning rate')
-    parser.add_argument('--momentum', type=float, default=0.95, help='momentum parameter for RMSProp Optim')
-    # parser.add_argument('--weight_decay', type=float, default=1e-5, help='weight decay (L2 penalty)')
-    # parser.add_argument('--epochs', type=int, default=233, help='number of epochs to train')
-    # parser.add_argument('--batch_size', type=int, default=128, help='training input batch size')
+    parser.add_argument('--save_dir', default='results/', metavar='PATH', help='saving directory')
+    parser.add_argument('--model_path', default='model/', metavar='PATH', help='model directory')
+    parser.add_argument('--hparam_file', default='experiments/base_model/params.json', help='hparam file')
 
     # training settings
     parser.add_argument('--resume', type=bool, default=False, help='whether re-training from ckpt')
@@ -37,17 +32,20 @@ def parse_args():
     return args
 
 
-def parse_hparam():
+def parse_hparam(hparam_file):
     """Parse hyper-parameters."""
-    params = Params("experiments/base_model/params.json")
+    params = Params(hparam_file)
     return params
 
 
 def main():
     """Main pipeline for Deep Reinforcement Learning with Double Q-learning."""
+    # default parameters
     args = parse_args()
     print(args)
-    pass
+    # hyper-parameters
+    hparam = parse_hparam(args.hparam_file)
+    print(hparam)
 
 
 if __name__ == '__main__':
