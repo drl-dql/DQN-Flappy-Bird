@@ -1,7 +1,7 @@
 {
     "model_version": "baseline",
 
-    "lr" : 0.00025,
+    "lr" : 1e-4,
     "discount_factor" : 0.99,
     "batch_size" : 32,
     "momentum": 0.95,
