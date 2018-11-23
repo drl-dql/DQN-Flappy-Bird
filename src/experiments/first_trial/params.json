@@ -1,5 +1,5 @@
 {
-    "model_version": "baseline",
+    "model_version": "first_trial",
 
     "lr" : 1e-4,
     "discount_factor" : 0.99,

@@ -3,7 +3,7 @@ Deep Reinforcement Learning with Double Q-learning on Atari 2600
 
 High Level Pipeline.
 
-@author: Shubham Bansal,Naman Shukla, Ziyu Zhou, Jianqiu Kong, Zhenye Na
+@author: Shubham Bansal, Naman Shukla, Ziyu Zhou, Jianqiu Kong, Zhenye Na
 @references:
     [1] Hado van Hasselt, Arthur Guez and David Silver.
         Deep Reinforcement Learning with Double Q-learning. arXiv:1509.06461

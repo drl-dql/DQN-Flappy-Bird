@@ -1,9 +1,9 @@
 """
 Deep Reinforcement Learning with Double Q-learning on Atari 2600.
 
-CNN model for game frames preprocess.
+Network Architecture.
 
-@author: Shubham Bansal,Naman Shukla, Ziyu Zhou, Jianqiu Kong, Zhenye Na
+@author: Shubham Bansal, Naman Shukla, Ziyu Zhou, Jianqiu Kong, Zhenye Na
 @references:
     [1] Hado van Hasselt, Arthur Guez and David Silver.
         Deep Reinforcement Learning with Double Q-learning. arXiv:1509.06461
@@ -38,12 +38,10 @@ class Model(nn.Module):
             nn.ReLU()
         )
 
-
         self.classifier = nn.Sequential(
             nn.Linear(in_features=64*7*7, out_features=512),
             nn.ReLU(),
             nn.Linear(in_features=512, out_features=self.output_size))
-
 
     def forward(self, observation):
         """Forward pass."""
