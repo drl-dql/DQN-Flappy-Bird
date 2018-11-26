@@ -12,6 +12,9 @@ Network Architecture.
 import torch
 import torch.nn as nn
 
+from utils import save_checkpoint, load_checkpoint
+
+
 class Model(nn.Module):
     """DQN-CNN model."""
 

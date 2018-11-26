@@ -10,11 +10,13 @@ Helper Functions.
 """
 
 import os
+import cv2
 import json
 import shutil
 import logging
 
 import torch
+import numpy as np
 
 
 class Params():
@@ -104,11 +106,13 @@ def save_checkpoint(state, is_best, checkpoint):
         checkpoint: (string) folder where parameters are to be saved
     """
     filepath = os.path.join(checkpoint, 'last.pth.tar')
+
     if not os.path.exists(checkpoint):
         print("Checkpoint Directory does not exist! Making directory {}".format(checkpoint))
         os.mkdir(checkpoint)
     else:
         print("Checkpoint Directory exists! ")
+
     torch.save(state, filepath)
     if is_best:
         shutil.copyfile(filepath, os.path.join(checkpoint, 'best.pth.tar'))
@@ -128,10 +132,48 @@ def load_checkpoint(checkpoint, model, optimizer=None):
     """
     if not os.path.exists(checkpoint):
         raise("File doesn't exist {}".format(checkpoint))
+
     checkpoint = torch.load(checkpoint)
     model.load_state_dict(checkpoint['state_dict'])
-
     if optimizer:
         optimizer.load_state_dict(checkpoint['optim_dict'])
 
     return checkpoint
+
+
+def make_video(images, fps):
+    """
+    Make videos.
+
+    Args:
+        images:
+        fps:
+    """
+    import moviepy.editor as mpy
+    duration = len(images) / fps
+
+    def make_frame(t):
+        """A function `t-> frame at time t` where frame is a w*h*3 RGB array."""
+        try:
+            x = images[int(len(images) / duration * t)]
+        except:
+            x = images[-1]
+        return x.astype(np.uint8)
+
+    clip = mpy.VideoClip(make_frame, duration=duration)
+    clip.fps = fps
+
+    return clip
+
+
+def convert(image):
+    """
+    Convert images to 84 * 84.
+
+    Args:
+        image: PLE game screen.
+    """
+    image = cv2.resize(image, (84, 84))
+    _, image = cv2.threshold(image, 100, 255, cv2.THRESH_BINARY_INV)
+
+    return image

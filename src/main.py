@@ -10,7 +10,7 @@ High Level Pipeline.
 """
 
 import argparse
-from utils import Params
+from utils import *
 
 
 def parse_args():
