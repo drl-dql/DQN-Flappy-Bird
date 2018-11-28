@@ -36,11 +36,11 @@ def parse_args():
                         help='train policy or not', default=True)
 
     # directory
-    parser.add_argument('--save_dir', type=str,
+    parser.add_argument('--save_path', type=str,
                         default='results/', help='saving directory')
     parser.add_argument('--model_path', type=str,
                         default='model/', help='model directory')
-    parser.add_argument('--hparam_file', type=str,
+    parser.add_argument('--hparam_path', type=str,
                         default='experiments/base_model/params.json',
                         help='hparam file')
 
@@ -50,14 +50,44 @@ def parse_args():
     return args
 
 
-def parse_hparam(hparam_file):
+def parse_hparam(hparam_path):
     """Parse hyper-parameters."""
-    params = Params(hparam_file)
+    params = Params(hparam_path)
     return params
 
 
-def train(**kwargs):
+def train(args, hparams):
     """Train."""
+    logs_path = args.logs_path
+    video_path = args.video_path
+    restore = args.restore
+    train = args.train
+
+    # Initial PLE environment
+    os.putenv('SDL_VIDEODRIVER', 'fbcon')
+    os.environ["SDL_VIDEODRIVER"] = "dummy"
+
+    # Design reward
+    reward_values = {
+        "positive": 1,
+        "tick": 0.1,
+        "loss": -1,
+    }
+
+    # Create FlappyBird game env
+    env = PLE(FlappyBird(), display_screen=False,
+              reward_values=reward_values)
+
+    # Gets the actions FlappyBird supports
+    action_set = env.getActionSet()
+
+    replay_buffer = ReplayBuffer(hparam.replay_buffer_size)
+    agent = Agent(action_set, hparams)
+
+    # restore model
+    if restore:
+        agent.restore(restore)
+
     reward_logs = []
     loss_logs = []
 
@@ -77,16 +107,19 @@ def train(**kwargs):
         while not env.game_over():
             action = agent.take_action(state)
             reward = env.act(action_set[action])
+
             if episode % hparam.save_video_frequency == 0 and episode > hparam.initial_observe_episode:
                 frames.append(env.getScreenRGB())
             obs = convert(env.getScreenGrayscale())
             obs = np.reshape(obs, [1, 1, obs.shape[0], obs.shape[1]])
+
             state_new = np.append(state[:, 1:, ...], obs, axis=1)
             action_onehot = np.zeros(len(action_set))
             action_onehot[action] = 1
+
             t_alive += 1
             total_reward += reward
-            reply_buffer.append(
+            replay_buffer.append(
                 (state, action_onehot, reward, state_new, env.game_over()))
             state = state_new
 
@@ -97,7 +130,7 @@ def train(**kwargs):
             clip.write_videofile(os.path.join(
                 video_path, 'env_{}.mp4'.format(episode)), fps=60)
             agent.restore_epsilon()
-            print('Episode: {} t: {} Reward: {:.3f}' .format(
+            print('Episode: {} t: {} Reward: {:.3f}'.format(
                 episode, t_alive, total_reward))
 
         if episode > hparam.initial_observe_episode and train:
@@ -113,8 +146,8 @@ def train(**kwargs):
             if episode % hparam.update_target_frequency == 0:
                 agent.update_target_network()
 
-            # sample batch from reply buffer
-            batch_state, batch_action, batch_reward, batch_state_new, batch_over = reply_buffer.sample(
+            # sample batch from replay buffer
+            batch_state, batch_action, batch_reward, batch_state_new, batch_over = replay_buffer.sample(
                 hparam.batch_size)
 
             # update policy network
@@ -126,7 +159,7 @@ def train(**kwargs):
 
             # print reward and loss
             if episode % hparam.show_loss_frequency == 0:
-                print('Episode: {} t: {} Reward: {:.3f} Loss: {:.3f}' .format(
+                print('Episode: {} t: {} Reward: {:.3f} Loss: {:.3f}'.format(
                     episode, t_alive, total_reward, loss))
 
             agent.update_epsilon()
@@ -134,35 +167,11 @@ def train(**kwargs):
 
 def main():
     """Main pipeline for Deep Reinforcement Learning with Double Q-learning."""
-    # default parameters
     args = parse_args()
+    hparams = parse_hparam(args.hparam_path)
 
-    # hyper-parameters
-    hparam = parse_hparam(args.hparam_file)
-    print(hparam)
-
-    # Initial PLE environment
-    os.putenv('SDL_VIDEODRIVER', 'fbcon')
-    os.environ["SDL_VIDEODRIVER"] = "dummy"
-
-    # Design reward
-    reward_values = {
-        "positive": 1,
-        "tick": 0.1,
-        "loss": -1,
-    }
-    env = PLE(FlappyBird(), fps=30, display_screen=False,
-              reward_values=reward_values)
-    action_set = env.getActionSet()
-
-    replay_buffer = ReplayBuffer(hparam.replay_buffer_size)
-    agent = Agent(action_set)
-
-    # restore model
-    if restore:
-        agent.restore(restore)
-
-    train(agent, replay_buffer)
+    # start training
+    train(args, hparams)
 
 
 if __name__ == '__main__':

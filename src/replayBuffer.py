@@ -15,21 +15,21 @@ import numpy as np
 
 
 class ReplayBuffer:
-    """"""
+    """Replay Buffer."""
 
     def __init__(self, buffer_size):
-        """"""
+        """Replay Buffer Initialization."""
         self.buffer = deque()
         self.buffer_size = buffer_size
 
     def append(self, item):
-        """"""
+        """Append to existing Replay Buffer."""
         if len(self.buffer) > self.buffer_size:
             self.buffer.popleft()
         self.buffer.append(item)
 
     def sample(self, batch_size):
-        """"""
+        """Sampling."""
         batch = random.sample(self.buffer, batch_size)
         batch_state, batch_action, batch_reward, batch_state_new, batch_over = [], [], [], [], []
 
