@@ -5,8 +5,10 @@
 #PBS -e $PBS_JOBNAME.$PBS_JOBID.err
 #PBS -o $PBS_JOBNAME.$PBS_JOBID.out
 #PBS -M netid@illinois.edu
-cd ~/scratch/drl-dql/
+cd ~/scratch/ddqn-flappybird/
 . /opt/modules/default/init/bash
-module load bwpy/2.0.0-pre2
+module load bwpy/2.0.0-pre4
+module load gcc/5.3.0
 module load cudatoolkit
-aprun -n 1 -N 1 python main.py
+source test2/bin/activate
+aprun -n 1 -N 1 python main.py --train=True --video_path=./video --logs_path=./logs
