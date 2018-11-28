@@ -5,7 +5,7 @@
     "discount_factor" : 0.99,
     "batch_size" : 32,
     "momentum": 0.95,
-    "reply_buffer_size" : 1000000,
+    "replay_buffer_size" : 1000000,
 
     "epochs": 10,
     "total_episode" : 100000,
