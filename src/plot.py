@@ -9,9 +9,9 @@ Visualize loss and reward.
         Deep Reinforcement Learning with Double Q-learning. arXiv:1509.06461
 """
 
-
-import argparse
 import os
+import argparse
+import vapeplot
 import numpy as np
 from visdom import Visdom
 import matplotlib.pyplot as plt
@@ -41,8 +41,9 @@ def main():
     avg_reward = np.cumsum(reward) / np.arange(1, len(reward) + 1)
 
     # instantiate Visdom object
-    viz = Visdom()
+    # viz = Visdom()
 
+    vapeplot.set_palette('macplus')
     fig, ax1 = plt.subplots(figsize=(20, 10))
 
     # subplot for loss
@@ -63,11 +64,11 @@ def main():
 
     # otherwise the right y-label is slightly clipped
     fig.tight_layout()
-    viz.matplot(plt)
+    # viz.matplot(plt)
 
-    # if not os.path.isdir("../outs/"):
-    #     os.mkdir("../outs/")
-    # plt.savefig("../outs/loss_reward.png", format='png')
+    if not os.path.isdir("../outs/"):
+        os.mkdir("../outs/")
+    plt.savefig("../outs/loss_reward.png", format='png')
 
 
 if __name__ == '__main__':
