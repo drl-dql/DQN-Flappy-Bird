@@ -11,9 +11,7 @@ Visualize loss and reward.
 
 import os
 import argparse
-import vapeplot
 import numpy as np
-from visdom import Visdom
 import matplotlib.pyplot as plt
 
 
@@ -42,8 +40,6 @@ def main():
 
     # instantiate Visdom object
     # viz = Visdom()
-
-    vapeplot.set_palette('macplus')
     fig, ax1 = plt.subplots(figsize=(20, 10))
 
     # subplot for loss
@@ -64,7 +60,6 @@ def main():
 
     # otherwise the right y-label is slightly clipped
     fig.tight_layout()
-    # viz.matplot(plt)
 
     if not os.path.isdir("../outs/"):
         os.mkdir("../outs/")
