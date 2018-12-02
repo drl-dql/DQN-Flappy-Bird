@@ -17,7 +17,7 @@ import matplotlib.pyplot as plt
 def main():
     """Plot."""
     logs_paths = ['../../../Project/DDQN-pytorch-master/logs/']
-    for trial in range(1, 30):
+    for trial in range(1, 34):
         logs_paths.append(
             "../../../Project/DDQN-pytorch-master_{}/logs/".format(trial))
 
@@ -28,8 +28,7 @@ def main():
         _, loss = zip(*np.load(os.path.join(logs_path, 'loss.npy')))
         avg_reward = np.cumsum(reward) / np.arange(1, len(reward) + 1)
 
-        # instantiate Visdom object
-        # viz = Visdom()
+        # subplot
         fig, ax1 = plt.subplots(figsize=(20, 10))
 
         # subplot for loss
@@ -41,6 +40,7 @@ def main():
 
         # instantiate a second axes that shares the same x-axis
         ax2 = ax1.twinx()
+        ax1.set_ylim(0, max(avg_reward))
 
         # subplot for average reward
         color = 'tab:blue'

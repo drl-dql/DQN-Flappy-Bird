@@ -38,8 +38,7 @@ def main():
     _, loss = zip(*np.load(os.path.join(logs_path, 'loss.npy')))
     avg_reward = np.cumsum(reward) / np.arange(1, len(reward) + 1)
 
-    # instantiate Visdom object
-    # viz = Visdom()
+    # subplot
     fig, ax1 = plt.subplots(figsize=(20, 10))
 
     # subplot for loss
@@ -51,6 +50,7 @@ def main():
 
     # instantiate a second axes that shares the same x-axis
     ax2 = ax1.twinx()
+    ax1.set_ylim(0, max(avg_reward))
 
     # subplot for average reward
     color = 'tab:blue'
@@ -63,7 +63,7 @@ def main():
 
     if not os.path.isdir("../outs/"):
         os.mkdir("../outs/")
-    plt.savefig("../outs/loss_reward.png", format='png')
+    plt.savefig("../outs/loss_reward_666.png", format='png')
 
 
 if __name__ == '__main__':
