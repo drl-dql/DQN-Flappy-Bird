@@ -64,14 +64,14 @@ For our project, we are planning to implement the proposed algorithm on ATARI 26
 ### Agent
 
 <p align="center">
-  <img src="./gifs/env_90000.gif" />
+  <img src="./gifs/env_78000.gif" />
 </p>
 
 
 ### Loss and Average Reward
 
 <p align="center">
-  <img src="./outs/loss_reward_13.png" />
+  <img src="./outs/loss_reward_14.png" />
 </p>
 
 
