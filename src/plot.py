@@ -34,8 +34,8 @@ def main():
     logs_path = args.logs_path
 
     # read in reward and loss
-    episode, reward = zip(*np.load(os.path.join(logs_path, 'reward.npy')))
-    _, loss = zip(*np.load(os.path.join(logs_path, 'loss.npy')))
+    episode, reward = zip(*np.load(os.path.join(logs_path, 'reward_23.npy')))
+    _, loss = zip(*np.load(os.path.join(logs_path, 'loss_23.npy')))
     avg_reward = np.cumsum(reward) / np.arange(1, len(reward) + 1)
 
     # subplot
@@ -43,8 +43,8 @@ def main():
 
     # subplot for loss
     color = 'tab:orange'
-    ax1.set_xlabel('Episode')
-    ax1.set_ylabel('Loss', color=color)
+    ax1.set_xlabel('Episode', fontsize=20)
+    ax1.set_ylabel('Loss', color=color, fontsize=20)
     ax1.plot(episode, loss, color=color)
     ax1.tick_params(axis='y', labelcolor=color)
 
@@ -54,16 +54,19 @@ def main():
 
     # subplot for average reward
     color = 'tab:blue'
-    ax2.set_ylabel('Average Reward', color=color)
+    ax2.set_ylabel('Average Reward', color=color, fontsize=20)
     ax2.plot(episode, avg_reward, color=color)
     ax2.tick_params(axis='y', labelcolor=color)
+
+    # ax1.set_title('Adam optimizer, learning rate: 1e-3, Discount factor: 0.97, update target frequency: 13, batch size: 32, intial observe episode: 120', fontsize=20)
+    ax1.set_title('Adam optimizer, learning rate: 1e-4, Discount factor: 0.99, update target frequency: 3, batch size: 16, intial observe episode: 120', fontsize=20)
 
     # otherwise the right y-label is slightly clipped
     fig.tight_layout()
 
-    if not os.path.isdir("../outs/"):
-        os.mkdir("../outs/")
-    plt.savefig("../outs/loss_reward.png", format='png')
+    if not os.path.isdir("./outs/"):
+        os.mkdir("./outs/")
+    plt.savefig("./outs/best.png", format='png')
 
 
 if __name__ == '__main__':
