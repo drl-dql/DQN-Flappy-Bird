@@ -63,13 +63,22 @@ For our project, we are planning to implement the proposed algorithm on ATARI 26
 
 ### Agent preview
 
-<p align="center">
-  <img src="./gifs/env_78000.gif" />
-</p>
+<!--<p align="center">
+  <img src="./gifs/env_78000_.gif" />
+</p>-->
 
-
-
-
+<table class="tg">
+  <tr>
+    <td class="tg-c3ow"><img src="./gifs/env_78000.gif"></td>
+    <td class="tg-c3ow"><img src="./gifs/env_92000.gif"></td>
+    <td class="tg-c3ow"><img src="./gifs/env_100000.gif"></td>
+  </tr>
+  <tr>
+    <td class="tg-c3ow">Longest play</td>
+    <td class="tg-c3ow">Risky play</td>
+    <td class="tg-c3ow">Worst play</td>
+  </tr>
+</table>
 
 ### Loss and Average Reward
 
@@ -82,3 +91,15 @@ For our project, we are planning to implement the proposed algorithm on ATARI 26
 
 [1] Hado van Hasselt, Arthur Guez and David Silver. [*"Deep Reinforcement Learning with Double Q-learning"*](https://arxiv.org/abs/1509.06461)
 
+
+
+<style type="text/css">
+table {
+  margin: 0 auto; /* or margin: 0 auto 0 auto */
+}
+
+.tg  {border-collapse:collapse;border-spacing:0;border:none;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;}
+.tg .tg-c3ow{border-color:inherit;text-align:center;vertical-align:top}
+</style>
