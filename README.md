@@ -81,7 +81,11 @@ For our project, we are planning to implement the proposed algorithm on ATARI 26
 ### Loss and Average Reward
 
 <p align="center">
-  <img src="./outs/loss_reward_14.png" />
+  <img src="./fig/best.png" />
+</p>
+
+<p align="center">
+  <img src="./fig/worst.png" />
 </p>
 
 
