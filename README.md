@@ -34,7 +34,7 @@ In this project, we will attempt to implement the algorithm developed by Google 
 
     1. **Double Q-learning**: The max operator in standard Q-learning and DQN, uses the same values both to select and to evaluate an action. This makes it more likely to select overestimated values, resulting in over-optimistic value estimates. To prevent this, we can decouple the selection from the evaluation. This is the idea behind Double Q-learning.
 
-2. **Overoptimism** due to estimation errors: Thrun and Schwartz (1993) gave a concrete example in which Q-learning’s overestimations even asymptotically lead to suboptimal policies, and showed the overestimations manifest themselves in a small toy problem when using function approximation. Later van Hasselt (2010) argued that noise in the environment can lead to overestimations even when using tabular representation, and proposed Double Q-learning as a solution.
+2. **Overoptimism** due to estimation errors: Thrun and Schwartz (1993) gave a concrete example in which Q-learning's overestimations even asymptotically lead to suboptimal policies, and showed the overestimations manifest themselves in a small toy problem when using function approximation. Later van Hasselt (2010) argued that noise in the environment can lead to overestimations even when using tabular representation, and proposed Double Q-learning as a solution.
 
     ![](./fig/overoptimization.png)
 
@@ -56,16 +56,19 @@ In this project, we will attempt to implement the algorithm developed by Google 
 
 ## Environment configuration
 
-For our project, we are planning to implement the proposed algorithm on ATARI 2600 games which is available at [OpenAI Gym](https://gym.openai.com/) and at [PyGame Learning Environment](https://pygame-learning-environment.readthedocs.io/en/latest/). Additional resources are also available at Pygame and PyPi community. A particular simulator environment, that our team is interested in - **"Flappy Bird"**, is available [here](https://github.com/ntasfi/PyGame-Learning-Environment).
+For our project, we are planning to implement the proposed algorithm on ATARI 2600 games which is available at [PyGame Learning Environment](https://pygame-learning-environment.readthedocs.io/en/latest/). Additional resources are also available at Pygame and PyPi community. A particular simulator environment, that our team is interested in - **"Flappy Bird"**, is available [here](https://github.com/ntasfi/PyGame-Learning-Environment).
 
 
 ## Experiment results
 
-### Agent
+### Agent preview
 
 <p align="center">
   <img src="./gifs/env_78000.gif" />
 </p>
+
+
+
 
 
 ### Loss and Average Reward
@@ -78,3 +81,4 @@ For our project, we are planning to implement the proposed algorithm on ATARI 26
 ## References
 
 [1] Hado van Hasselt, Arthur Guez and David Silver. [*"Deep Reinforcement Learning with Double Q-learning"*](https://arxiv.org/abs/1509.06461)
+
