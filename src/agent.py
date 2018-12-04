@@ -15,9 +15,9 @@ import random
 
 import torch
 import torch.optim as optim
+
 from torch.autograd import Variable
 from torch.nn.functional import mse_loss
-
 from model import Model
 
 
@@ -35,8 +35,8 @@ class Agent:
 
     def _build_network(self):
         """Create Q Network and target network."""
-        self.Q_network = Model(4, self.action_number).cuda()
-        self.target_network = Model(4, self.action_number).cuda()
+        self.Q_network = Model(self.action_number).cuda()
+        self.target_network = Model(self.action_number).cuda()
         self.optimizer = optim.RMSprop(self.Q_network.parameters(),
                                        lr=self.hparam.lr,
                                        momentum=self.hparam.momentum)
@@ -65,10 +65,9 @@ class Agent:
         self.target_network.eval()
 
         # use current network to evaluate action argmax_a' Q_current(s', a')_
-        action_new = self.Q_network.forward(state_new).max(dim=1)[
-            1].cpu().data.view(-1, 1)
-        action_new_onehot = torch.zeros(
-            self.hparam.batch_size, self.action_number)
+        action_new = self.Q_network.forward(state_new).max(dim=1)[1].cpu().data.view(-1, 1)
+        action_new_onehot = torch.zeros(self.hparam.batch_size,
+                                        self.action_number)
         action_new_onehot = Variable(
             action_new_onehot.scatter_(1, action_new, 1.0)).cuda()
 

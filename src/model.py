@@ -18,19 +18,17 @@ from utils import save_checkpoint, load_checkpoint
 class Model(nn.Module):
     """DQN-CNN model."""
 
-    def __init__(self, input_size, output_size):
+    def __init__(self, action_num):
         """DQN-CNN Model Initialization."""
         super(Model, self).__init__()
 
-        self.input_size = input_size
-        self.output_size = output_size
+        self.action_num = action_num
         self.features = nn.Sequential(
             # conv1
-            nn.Conv2d(in_channels=self.input_size,
+            nn.Conv2d(in_channels=4,
                       out_channels=32,
                       kernel_size=8,
                       stride=4),
-            nn.BatchNorm2d(num_features=32),
             nn.ReLU(),
 
             # conv2
@@ -38,7 +36,6 @@ class Model(nn.Module):
                       out_channels=64,
                       kernel_size=4,
                       stride=2),
-            nn.BatchNorm2d(num_features=64),
             nn.ReLU(),
 
             # conv3
@@ -46,14 +43,13 @@ class Model(nn.Module):
                       out_channels=64,
                       kernel_size=3,
                       stride=1),
-            nn.BatchNorm2d(num_features=64),
             nn.ReLU()
         )
 
         self.classifier = nn.Sequential(
             nn.Linear(in_features=64 * 7 * 7, out_features=512),
             nn.ReLU(),
-            nn.Linear(in_features=512, out_features=self.output_size))
+            nn.Linear(in_features=512, out_features=self.action_num))
 
     def forward(self, x):
         """Forward pass."""
@@ -62,3 +58,17 @@ class Model(nn.Module):
         out = self.classifier(out)
 
         return out
+
+    def save(self, path, step, optimizer):
+        torch.save({
+            'step': step,
+            'state_dict': self.state_dict(),
+            'optimizer': optimizer.state_dict()
+        }, path)
+            
+    def load(self, checkpoint_path, optimizer=None):
+        checkpoint = torch.load(checkpoint_path)
+        step = checkpoint['step']
+        self.load_state_dict(checkpoint['state_dict'])
+        if optimizer is not None:
+            optimizer.load_state_dict(checkpoint['optimizer'])
