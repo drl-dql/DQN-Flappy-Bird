@@ -53,6 +53,7 @@ class Agent:
         terminal = torch.from_numpy(terminal).float()
         reward = torch.from_numpy(reward).float()
 
+        # wrap them in `Variable` and cuda support
         state = Variable(state).cuda()
         action = Variable(action).cuda()
         state_new = Variable(state_new).cuda()
@@ -82,7 +83,7 @@ class Agent:
         Q = (self.Q_network.forward(state) * action).sum(dim=1)
         loss = mse_loss(input=Q, target=y.detach())
 
-        # backward optimize
+        # optimizer perform back propagation
         self.optimizer.zero_grad()
         loss.backward()
         self.optimizer.step()
@@ -122,7 +123,7 @@ class Agent:
         os.makedirs(logs_path, exist_ok=True)
         model_list = glob.glob(os.path.join(logs_path, '*.pth'))
 
-        # remove oldest model
+        # remove oldest model and save the current model
         if len(model_list) > self.hparam.maximum_model - 1:
             min_step = min([int(li.split('/')[-1][6:-4]) for li in model_list])
             os.remove(os.path.join(logs_path, 'model-{}.pth' .format(min_step)))

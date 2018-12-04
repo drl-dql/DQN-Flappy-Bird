@@ -63,7 +63,7 @@ def main():
 
     if not os.path.isdir("../outs/"):
         os.mkdir("../outs/")
-    plt.savefig("../outs/loss_reward_666.png", format='png')
+    plt.savefig("../outs/loss_reward.png", format='png')
 
 
 if __name__ == '__main__':

@@ -17,7 +17,7 @@ import matplotlib.pyplot as plt
 def main():
     """Plot."""
     logs_paths = ['../../../Project/DDQN-pytorch-master/logs/']
-    for trial in range(1, 34):
+    for trial in range(1, 35):
         logs_paths.append(
             "../../../Project/DDQN-pytorch-master_{}/logs/".format(trial))
 

@@ -1,7 +1,7 @@
 """
 Deep Reinforcement Learning with Double Q-learning on Atari 2600.
 
-COnvert mp4 to gifs.
+Convert mp4 to gifs.
 
 @author: Shubham Bansal, Naman Shukla, Ziyu Zhou, Jianqiu Kong, Zhenye Na
 @references:
@@ -52,18 +52,18 @@ def convert(inputpath, targetformat):
 def main():
     """Convert mp4 to gifs."""
 
-    path = "../../../Project/DDQN-pytorch-master_13/video/"
+    # path = "../../../Project/DDQN-pytorch-master_13/video/"
 
-    videos_paths = ["../../../Project/DDQN-pytorch-master/video/"]
-    for i in range(1, 30):
-        videos_paths.append("../../../Project/DDQN-pytorch-master_{}/video/".format(i))
+    # videos_paths = ["../../../Project/DDQN-pytorch-master/video/"]
+    # for i in range(1, 30):
+    #     videos_paths.append("../../../Project/DDQN-pytorch-master_{}/video/".format(i))
 
     # for video_path in videos_paths:
     #     all_videos = os.listdir(video_path).split(".").split("_")
 
     # sa
     # for video_path in videos_paths:
-    convert(path + "env_90000_copy.mp4", TargetFormat.GIF)
+    convert("env_100000.mp4", TargetFormat.GIF)
 
 if __name__ == '__main__':
     main()
