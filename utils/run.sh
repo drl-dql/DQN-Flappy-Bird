@@ -4,10 +4,10 @@
 
 # MODIFY THESE
 declare training_file="main.py"
-declare walltime="24:00:00"
-declare jobname="drl-dql"
+declare walltime="48:00:00"
+declare jobname="ddqn-flappybird"
 declare netid="netid"
-declare directory="~/scratch/drl-dql/"
+declare directory="~/scratch/atari-game/src/"
 
 for job in "${directory[@]}"
 do
