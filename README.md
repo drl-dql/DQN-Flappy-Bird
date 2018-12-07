@@ -58,6 +58,56 @@ In this project, we will attempt to implement the algorithm developed by Google 
 
 For our project, we are planning to implement the proposed algorithm on ATARI 2600 games which is available at [PyGame Learning Environment](https://pygame-learning-environment.readthedocs.io/en/latest/). Additional resources are also available at Pygame and PyPi community. A particular simulator environment, that our team is interested in - **"Flappy Bird"**, is available [here](https://github.com/ntasfi/PyGame-Learning-Environment).
 
+### Running it on `Google Colaboratory` (Free GPU)
+
+> **Note**: Make sure the GPU is available in the notebook
+
+##### Mounting Google drive on Colab Notebook (Optional)
+
+```
+from google.colab import drive
+drive.mount('/content/drive/')
+```
+
+navigate to the drive
+
+```
+cd drive/My\ Drive
+```
+
+##### Environment setup
+
+Download the repository
+
+```
+!git clone https://github.com/drl-dql/DQN-Flappy-Bird.git
+```
+
+Navigate to the directory
+
+```
+cd DQN-Flappy-Bird/
+```
+
+Configure the notebook:
+
+```
+!bash setup.sh
+```
+
+##### Training the agent
+
+Navigate to the `src` directory
+
+```
+cd src/
+```
+
+Execute file `main.py`
+
+```
+!python main.py --train=True --video_path=./video_XXX --logs_path=./logs_XXX 
+```
 
 ## Experiment results
 
