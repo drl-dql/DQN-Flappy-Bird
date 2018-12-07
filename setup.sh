@@ -2,7 +2,7 @@
 
 echo "Running Setup ..."
 
-utils/pytorch041_cuda92_colab.sh
+bash utils/pytorch041_cuda92_colab.sh
 pip install visdom
 pip install pygame
 pip install moviepy
