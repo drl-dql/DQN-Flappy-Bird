@@ -85,6 +85,13 @@ class Agent:
         # optimizer perform back propagation
         self.optimizer.zero_grad()
         loss.backward()
+
+        # in case of Adam optimizer causes overflow in GPU
+        for group in self.optimizer.param_groups:
+            for p in group['params']:
+                state = self.optimizer.state[p]
+                if('step' in state and state['step'] >= 1024):
+                    state['step'] = 1000
         self.optimizer.step()
 
         return loss.data[0]
