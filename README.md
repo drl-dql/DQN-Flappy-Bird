@@ -153,7 +153,7 @@ Execute file `main.py`
 
 [6]  T. Simonini.  Improvements in deep q learning: Dueling dou-ble dqn, prioritized experience replay, and fixed..., Jul 2018.
 
-[7]  N.Tasfi.Pygamelearningenviron-ment.https://github.com/ntasfi/PyGame-Learning-Environment, 2016.
+[7]  N.Tasfi. [Pygame learning environment](https://github.com/ntasfi/PyGame-Learning-Environment), 2016.
 
 [8]  H.  van  Hasselt,  A.  Guez,  and  D.  Silver.    Deep  reinforce-ment learning with double q-learning.CoRR, abs/1509.06461,2015.
 
