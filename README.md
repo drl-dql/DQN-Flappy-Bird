@@ -143,3 +143,17 @@ Execute file `main.py`
 
 [1] Hado van Hasselt, Arthur Guez and David Silver. [*"Deep Reinforcement Learning with Double Q-learning"*](https://arxiv.org/abs/1509.06461)
 
+[2]  K.  Fukushima.Neocognitron:   A  hierarchical  neural  net-work capable of visual pattern recognition.Neural Networks,1:119–130, 1988.
+
+[3]  H. V. Hasselt.  Double q-learning.  InAdvances in Neural In-formation Processing Systems, pages 2613–2621, 2010.
+
+[4]  Y. LeCun,  L. Bottou,  Y. Bengio,  and P. Haffner.   Gradient-based learning applied to document recognition.  InProceed-ings of the IEEE, volume 86, pages 2278–2324, 1998.
+
+[5]  V. Mnih, K. Kavukcuoglu, D. Silver, A. A. Rusu, J. Veness,M. G. Bellemare, A. Graves, M. Riedmiller, A. K. Fidjeland,G. Ostrovski, et al.  Human-level control through deep rein-forcement learning.Nature, 518(7540):529, 2015.
+
+[6]  T. Simonini.  Improvements in deep q learning: Dueling dou-ble dqn, prioritized experience replay, and fixed..., Jul 2018.
+
+[7]  N.Tasfi.Pygamelearningenviron-ment.https://github.com/ntasfi/PyGame-Learning-Environment, 2016.
+
+[8]  H.  van  Hasselt,  A.  Guez,  and  D.  Silver.    Deep  reinforce-ment learning with double q-learning.CoRR, abs/1509.06461,2015.
+
