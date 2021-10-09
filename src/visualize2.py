@@ -40,11 +40,11 @@ def main():
     episode4, reward4 = zip(*np.load(os.path.join(logs_path, 'reward_23.npy')))
     episode5, reward5 = zip(*np.load(os.path.join(logs_path, 'reward_24.npy')))
 
-    _, loss1 = zip(*np.load(os.path.join(logs_path, 'loss_20.npy')))
-    _, loss2 = zip(*np.load(os.path.join(logs_path, 'loss_21.npy')))
-    _, loss3 = zip(*np.load(os.path.join(logs_path, 'loss_22.npy')))
-    _, loss4 = zip(*np.load(os.path.join(logs_path, 'loss_23.npy')))
-    _, loss5 = zip(*np.load(os.path.join(logs_path, 'loss_24.npy')))
+    _, loss1 = zip(*np.load(os.path.join(logs_path, 'loss_20.npy'), allow_pickle=True))
+    _, loss2 = zip(*np.load(os.path.join(logs_path, 'loss_21.npy'), allow_pickle=True))
+    _, loss3 = zip(*np.load(os.path.join(logs_path, 'loss_22.npy'), allow_pickle=True))
+    _, loss4 = zip(*np.load(os.path.join(logs_path, 'loss_23.npy'), allow_pickle=True))
+    _, loss5 = zip(*np.load(os.path.join(logs_path, 'loss_24.npy'), allow_pickle=True))
 
     # avg_reward1 = np.cumsum(reward1) / np.arange(1, len(reward1) + 1)
     # avg_reward2 = np.cumsum(reward2) / np.arange(1, len(reward2) + 1)
